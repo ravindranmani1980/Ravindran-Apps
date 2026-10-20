@@ -1,0 +1,6 @@
+{
+  "name": "Azure Invoice Consolidator",
+  "description": "Consolidate multiple Azure subscription invoices into a centralized dashboard with automated monthly spending analytics, cost drivers, and FinOps insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
