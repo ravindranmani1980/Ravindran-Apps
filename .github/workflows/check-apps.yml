@@ -1,0 +1,57 @@
+# Checks the app repos for new code every 4 hours (and on demand from the Actions tab).
+# When any app has a new commit, it updates .github/apps.lock and pushes. That push makes
+# Cloudflare Pages rebuild apps.ravindran.in, and the build pulls the latest code of every
+# app (see _tools/build-apps.sh). If nothing changed, it does nothing, so no builds are used.
+# Private app repos (Maniq-Posture) need the repository secret APPS_READ_TOKEN: a
+# fine-grained token with read-only "Contents" access to them.
+name: Check apps for updates
+
+on:
+  schedule:
+    - cron: '23 */4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: check-apps
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Look up the latest commit of each app
+        env:
+          TOKEN: ${{ secrets.APPS_READ_TOKEN }}
+        run: |
+          set -eu
+          export GIT_TERMINAL_PROMPT=0
+          auth=""
+          [ -n "${TOKEN:-}" ] && auth="x-access-token:${TOKEN}@"
+          lock=.github/apps.lock
+          new=$(mktemp)
+          grep -v '^[[:space:]]*#' _tools/apps.txt | while read -r slug repo; do
+            [ -n "${slug:-}" ] || continue
+            sha=$(git ls-remote "https://${auth}github.com/ravindranmani1980/$repo.git" HEAD 2>/dev/null | cut -f1 || true)
+            if [ -z "$sha" ]; then
+              echo "::warning::Could not read $repo, keeping the last known commit"
+              sha=$(grep "^$slug " "$lock" 2>/dev/null | cut -d' ' -f3 || true)
+            fi
+            echo "$slug $repo ${sha:-unknown}" >> "$new"
+          done
+          if [ -f "$lock" ] && cmp -s "$new" "$lock"; then
+            echo "No app has changed. Nothing to do."
+            exit 0
+          fi
+          echo "Changes:"; diff "$lock" "$new" || true
+          mv "$new" "$lock"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898729+github-actions[bot]@users.noreply.github.com"
+          git add "$lock"
+          git commit -q -m "Apps updated on GitHub: rebuild the site" -m "$(cat "$lock")"
+          git push

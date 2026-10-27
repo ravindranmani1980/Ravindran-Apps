@@ -1,0 +1,15 @@
+# Apps built into apps.ravindran.in/<slug>/app/ on every Cloudflare build.
+# One app per line:  <slug>  <GitHub repo under ravindranmani1980>
+# To add an app: add a line here, add its card on ../ravindran.in-main/ai-automation.html
+# (its links point to https://apps.ravindran.in/<slug>/), then run
+#   python3 _tools/make_pages.py
+# Private repos need GITHUB_TOKEN on the Cloudflare project (see README.md).
+postrix               Maniq-Posture
+cloudparity           CloudParity
+invoice-consolidator  Azure-IG
+cloudcostiq           Azure-CloudCostIQ
+cloudbounty           CloudBounty
+azureshield           AzureShield
+aws-sentinel          AWS-Sentinel
+cybershield           CyberShield-EEE
+threatguard           CyberGuard-Academy
