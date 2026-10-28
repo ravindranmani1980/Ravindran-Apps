@@ -10,6 +10,6 @@ invoice-consolidator  Azure-IG
 cloudcostiq           Azure-CloudCostIQ
 cloudbounty           CloudBounty
 azureshield           AzureShield
-aws-sentinel          AWS-Sentinel
+Maniq-Watch           AWS-Sentinel
 cybershield           CyberShield-EEE
 threatguard           CyberGuard-Academy
