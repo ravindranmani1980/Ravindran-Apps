@@ -260,6 +260,6 @@ for slug, repo in apps:
     public_repo = f'github.com/{OWNER}/{repo}"' in card
     write(f'{slug}/index.html', page(slug, repo, kicker, title, facts, TAGLINE.get(slug, title), public_repo))
 write('index.html', hub(groups, apps))
-for rel in ('css/style.css', 'favicon.ico', 'images/og-card.png'):
+for rel in ('css/style.css', 'favicon.ico', 'apple-touch-icon.png', 'images/og-card.png'):
     copy(rel)
 print('\n'.join('wrote ' + c for c in changed) if changed else 'all pages unchanged')
