@@ -19,7 +19,7 @@ SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAIN = os.path.join(os.path.dirname(SITE), 'ravindran.in-main')
 OWNER = 'ravindranmani1980'
 BASE = 'https://apps.ravindran.in'
-CSS_VERSION = '20261027'
+CSS_VERSION = '20261027b'
 
 # One-line description shown under the app name on its page.
 TAGLINE = {
