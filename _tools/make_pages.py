@@ -43,6 +43,10 @@ DEFAULT_INTRO = 'Try it below: it runs in your browser with built-in sample data
 EXTRA_LINK = {
     'cybershield': ('https://ais-pre-elolfngen6z6f37daibx6g-647805725217.us-east1.run.app/', 'Full version'),
 }
+# Optional training video on an app page: slug -> (YouTube video id, title)
+VIDEO = {
+    'postrix': ('6bUHoCgOfi8', 'Postrix walkthrough'),
+}
 # Hub sections, in order: (id of the <h4 class="proj-sub"> on ai-automation.html, menu label)
 GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training')]
 
@@ -195,6 +199,23 @@ def hub(groups, apps):
 </main>
 {FOOTER}'''
 
+def video_section(slug, ht):
+    if slug not in VIDEO:
+        return ''
+    vid, vt = VIDEO[slug]
+    vt = html.escape(vt)
+    return f'''<section class="app-video" aria-labelledby="video-h" style="padding:40px 16px 8px">
+  <div class="wrap" style="max-width:960px">
+    <h2 id="video-h" style="margin:0 0 6px">Watch the walkthrough</h2>
+    <p style="margin:0 0 16px;color:var(--ink-soft)">A short guided tour of {ht}, then try it yourself below.</p>
+    <div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#0B1220;box-shadow:0 12px 40px rgba(8,20,32,0.18)">
+      <iframe src="https://www.youtube-nocookie.com/embed/{vid}?rel=0" title="{vt}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p style="margin:10px 0 0;font-size:0.88rem;color:var(--ink-soft)"><a href="https://youtu.be/{vid}" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a></p>
+  </div>
+</section>
+'''
+
 def page(slug, repo, kicker, title, facts, tagline, public_repo):
     links = [f'<a class="card-link" href="app/" target="_blank" rel="noopener">Open full screen {ARROW}</a>']
     if slug in EXTRA_LINK:
@@ -220,7 +241,7 @@ def page(slug, repo, kicker, title, facts, tagline, public_repo):
     <div class="card-links">{''.join(links)}</div>
   </div>
 </section>
-<section class="app-stage" aria-label="{ht} live app">
+{video_section(slug, ht)}<section class="app-stage" aria-label="{ht} live app">
   <div class="app-frame"><iframe src="app/" title="{ht} live app" loading="lazy" allow="clipboard-write; fullscreen" allowfullscreen></iframe></div>
   <p class="app-hint">On a phone? <a href="app/" target="_blank" rel="noopener">Open it full screen</a> for the best view.</p>
 </section>
