@@ -76,7 +76,7 @@
   .navlinks a:hover, .navlinks a:focus-visible{ color:var(--paper); border-color:var(--accent); }
   .navtoggle{ display:none; background:none; border:1px solid var(--line-soft); color:var(--paper); padding:8px 12px; border-radius:4px; }
 
-  @media (max-width:760px){
+  @media (max-width:1000px){
     .navlinks{
       position:absolute; top:64px; left:0; right:0;
       background:var(--navy-deep); flex-direction:column; gap:0;
@@ -347,3 +347,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-off
 .cards.projects.apps.three .proj-facts dd{ margin-bottom:10px; }
 @media (max-width:980px){ .cards.projects.apps.three{ grid-template-columns:1fr; } }
 #threatguard{ scroll-margin-top:84px; }
+
+/* RM logo mark in the header (added 27 Oct 2026) */
+.brand{ white-space:nowrap; }
+.brand-mark{ display:inline-block; vertical-align:middle; height:32px; width:auto; margin:-4px 10px 0 0; }

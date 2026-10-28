@@ -113,7 +113,7 @@ def header(current):
         cur = ' aria-current="page"' if href == current else ''
         lis.append(f'<li><a href="{href}"{cur}{ext}>{label}</a></li>')
     return ('<header class="site"><nav class="wrap" aria-label="Main navigation">'
-            '<a class="brand" href="/">Ravindran <span>Mani</span> &middot; Apps</a>'
+            '<a class="brand" href="/"><img class="brand-mark" src="/images/rm-mark.png" alt="" width="53" height="32">Ravindran <span>Mani</span> &middot; Apps</a>'
             '<button type="button" class="navtoggle" aria-expanded="false" aria-controls="navlinks" id="navBtn">Menu</button>'
             f'<ul class="navlinks" id="navlinks">{"".join(lis)}</ul></nav></header>')
 
@@ -157,7 +157,7 @@ def head(title, desc, url):
 <meta name="twitter:image" content="{BASE}/images/og-card.png">
 {fonts}
 <link rel="stylesheet" href="/css/style.css?v={CSS_VERSION}">
-<noscript><style>@media(max-width:760px){{nav.wrap{{height:auto;padding-top:12px;padding-bottom:12px}}.navtoggle{{display:none}}.navlinks{{position:static;max-height:none;visibility:visible;width:100%}}}}</style></noscript>
+<noscript><style>@media(max-width:1000px){{nav.wrap{{height:auto;padding-top:12px;padding-bottom:12px}}.navtoggle{{display:none}}.navlinks{{position:static;max-height:none;visibility:visible;width:100%}}}}</style></noscript>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 '''
 
@@ -260,6 +260,6 @@ for slug, repo in apps:
     public_repo = f'github.com/{OWNER}/{repo}"' in card
     write(f'{slug}/index.html', page(slug, repo, kicker, title, facts, TAGLINE.get(slug, title), public_repo))
 write('index.html', hub(groups, apps))
-for rel in ('css/style.css', 'favicon.ico', 'apple-touch-icon.png', 'images/og-card.png'):
+for rel in ('css/style.css', 'favicon.ico', 'apple-touch-icon.png', 'images/og-card.png', 'images/rm-mark.png'):
     copy(rel)
 print('\n'.join('wrote ' + c for c in changed) if changed else 'all pages unchanged')
