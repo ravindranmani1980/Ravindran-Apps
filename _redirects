@@ -6,3 +6,16 @@
 /azureshield      /Maniq-Shield/       301
 /azureshield/     /Maniq-Shield/       301
 /azureshield/*    /Maniq-Shield/:splat 301
+# Lowercase and other spellings (addresses are case-sensitive), added 29 Oct 2026.
+/maniq-shield     /Maniq-Shield/       301
+/maniq-shield/    /Maniq-Shield/       301
+/maniq-shield/*   /Maniq-Shield/:splat 301
+/maniq-watch      /Maniq-Watch/        301
+/maniq-watch/     /Maniq-Watch/        301
+/maniq-watch/*    /Maniq-Watch/:splat  301
+/AzureShield      /Maniq-Shield/       301
+/AzureShield/     /Maniq-Shield/       301
+/AzureShield/*    /Maniq-Shield/:splat 301
+/AWS-Sentinel     /Maniq-Watch/        301
+/AWS-Sentinel/    /Maniq-Watch/        301
+/AWS-Sentinel/*   /Maniq-Watch/:splat  301
