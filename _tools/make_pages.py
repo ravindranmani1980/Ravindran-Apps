@@ -28,7 +28,7 @@ TAGLINE = {
     'invoice-consolidator': 'Multi-subscription Azure invoice analyzer',
     'cloudcostiq':          'Cost savings analyzer and FinOps benchmarks',
     'cloudbounty':          'FinOps bounty dashboard and zombie-resource game',
-    'azureshield':          'Azure Storage and RBAC security auditor',
+    'Maniq-Shield':         'Azure Storage and RBAC security auditor',
     'Maniq-Watch':          'AWS S3 and IAM security auditor',
     'cybershield':          'Cyber defense training suite',
     'threatguard':          'Cyber defense game for teens and young adults',
@@ -179,7 +179,7 @@ def hub(groups, apps):
                     f'      <div class="cards projects apps">\n        ' + '\n        '.join(cards) + '\n      </div>')
     n = len(listed)
     desc = ('Cloud security, FinOps and security-awareness apps by Ravindran Mani: '
-            'Postrix, AzureShield, Maniq Watch, CloudParity, CloudBounty and more. Free to try in the browser.')
+            'Postrix, Maniq Shield, Maniq Watch, CloudParity, CloudBounty and more. Free to try in the browser.')
     return head('Cloud Security & FinOps Apps | Ravindran Mani', desc, BASE + '/') + header('/') + f'''
 <main id="main">
   <section class="alt">

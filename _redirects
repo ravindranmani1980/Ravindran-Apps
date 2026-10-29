@@ -2,3 +2,7 @@
 /aws-sentinel     /Maniq-Watch/        301
 /aws-sentinel/    /Maniq-Watch/        301
 /aws-sentinel/*   /Maniq-Watch/:splat  301
+# AzureShield was renamed Maniq Shield on 29 Oct 2026.
+/azureshield      /Maniq-Shield/       301
+/azureshield/     /Maniq-Shield/       301
+/azureshield/*    /Maniq-Shield/:splat 301
