@@ -46,14 +46,14 @@ DEFAULT_INTRO = 'Try it below: it runs in your browser with built-in sample data
 # https://www.youtube.com/watch?v=...). Leave it '' to show the "coming soon" placeholder.
 VIDEO = {
     'maniq-posture':        'https://youtu.be/6bUHoCgOfi8',
-    'Maniq-Shield':         '',
-    'Maniq-Watch':          '',
+    'Maniq-Shield':         'https://youtu.be/KnoAlHQ2FhI',
+    'Maniq-Watch':          'https://youtu.be/zGVGi_Ao6Rg',
     'maniq-compare':        '',
     'maniq-invoice':        '',
     'maniq-spend':          '',
     'maniq-sweep':          '',
-    'maniq-academy':        '',
-    'maniq-arcade':         '',
+    'maniq-academy':        'https://youtu.be/n8pxh4odVqQ',
+    'maniq-arcade':         'https://youtu.be/sKUw_Sd7eJI',
 }
 # Hub sections, in order: (id of the <h4 class="proj-sub"> on ai-automation.html, menu label)
 GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training')]
