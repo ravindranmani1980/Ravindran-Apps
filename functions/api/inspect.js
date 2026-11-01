@@ -1,12 +1,12 @@
 // GET /api/inspect?target=example.com
-// Passive check of a public website for Postrix: HTTP response headers (following up to
+// Passive check of a public website for Maniq Posture: HTTP response headers (following up to
 // 4 redirects), <meta http-equiv> tags in the first 64 KB of the page, and the DMARC record.
 // Replaces the /api/inspect route of the app's Node server (server.ts), which cannot run
 // on Cloudflare Pages. Differences: the TLS protocol and cipher are not measured (Workers
 // cannot see them); a successful HTTPS request does show the certificate is valid.
 import { json, parseTarget, checkHost } from './_lib.js';
 
-const UA = 'Postrix-PostureCheck/1.0 (+https://apps.ravindran.in/postrix/)';
+const UA = 'ManiqPosture-Check/1.0 (+https://apps.ravindran.in/maniq-posture/)';
 const MAX_BYTES = 65536;
 
 function metaHttpEquiv(html) {

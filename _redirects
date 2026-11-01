@@ -19,3 +19,26 @@
 /AWS-Sentinel     /Maniq-Watch/        301
 /AWS-Sentinel/    /Maniq-Watch/        301
 /AWS-Sentinel/*   /Maniq-Watch/:splat  301
+
+# Apps renamed to the Maniq family on 1 Nov 2026.
+/postrix               /maniq-posture/        301
+/postrix/              /maniq-posture/        301
+/postrix/*             /maniq-posture/:splat  301
+/cloudparity           /maniq-compare/        301
+/cloudparity/          /maniq-compare/        301
+/cloudparity/*         /maniq-compare/:splat  301
+/invoice-consolidator  /maniq-invoice/        301
+/invoice-consolidator/ /maniq-invoice/        301
+/invoice-consolidator/*/maniq-invoice/:splat  301
+/cloudcostiq           /maniq-spend/        301
+/cloudcostiq/          /maniq-spend/        301
+/cloudcostiq/*         /maniq-spend/:splat  301
+/cloudbounty           /maniq-sweep/        301
+/cloudbounty/          /maniq-sweep/        301
+/cloudbounty/*         /maniq-sweep/:splat  301
+/cybershield           /maniq-academy/        301
+/cybershield/          /maniq-academy/        301
+/cybershield/*         /maniq-academy/:splat  301
+/threatguard           /maniq-arcade/        301
+/threatguard/          /maniq-arcade/        301
+/threatguard/*         /maniq-arcade/:splat  301

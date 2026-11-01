@@ -1,5 +1,5 @@
 // POST /api/notify-assessment
-// Called by Postrix after each assessment. Replaces the route of the same name in the
+// Called by Maniq Posture after each assessment. Replaces the route of the same name in the
 // app's Node server. To stop the public site being used to send mail to strangers, it
 // never emails the tester. If SMTP is configured on the Cloudflare project, it emails you
 // (ADMIN_NOTIFICATION_EMAIL) a one-line summary of the run, the way the contact form does.
@@ -26,15 +26,15 @@ export async function onRequestPost({ request, env }) {
     passedChecks: Math.max(0, Number(b.passedChecks) || 0),
     failedChecks: Math.max(0, Number(b.failedChecks) || 0),
     timestamp,
-    summary: clip(b.summary, 500, 'Postrix assessment'),
+    summary: clip(b.summary, 500, 'Maniq Posture assessment'),
   };
 
-  const subject = `Your Postrix assessment of ${n.targetHostname || 'your site'}: grade ${n.headerGrade} (${n.postureScore}/100)`;
+  const subject = `Your Maniq Posture assessment of ${n.targetHostname || 'your site'}: grade ${n.headerGrade} (${n.postureScore}/100)`;
   const bodyText =
-    `Hello ${n.testerName},\n\nThank you for running Postrix.\n\n` +
+    `Hello ${n.testerName},\n\nThank you for running Maniq Posture.\n\n` +
     `Target: ${n.targetHostname}\nScore: ${n.postureScore}/100 (grade ${n.headerGrade})\n` +
     `Checks passed: ${n.passedChecks}, failed: ${n.failedChecks}\nRun at: ${timestamp}\n\n` +
-    `https://apps.ravindran.in/postrix/`;
+    `https://apps.ravindran.in/maniq-posture/`;
   const testerMail = {
     to: n.testerEmail,
     subject,
@@ -54,9 +54,9 @@ export async function onRequestPost({ request, env }) {
       await WorkerMailer.send(
         { host: SMTP_HOST, port, secure: port === 465, startTls: port !== 465,
           credentials: { username: SMTP_USER, password: SMTP_PASS }, authType: ['plain', 'login'] },
-        { from: { name: 'Postrix', email: env.FROM_EMAIL || SMTP_USER },
+        { from: { name: 'Maniq Posture', email: env.FROM_EMAIL || SMTP_USER },
           to: ADMIN_NOTIFICATION_EMAIL,
-          subject: `Postrix run: ${n.targetHostname} ${n.headerGrade} (${n.postureScore}/100)`,
+          subject: `Maniq Posture run: ${n.targetHostname} ${n.headerGrade} (${n.postureScore}/100)`,
           text: `${line}\n\nWorkspace: ${n.clientName}\nAt: ${timestamp}`,
           html: `<p>${escapeHtml(line)}</p><p>Workspace: ${escapeHtml(n.clientName)}<br>At: ${timestamp}</p>` }
       );

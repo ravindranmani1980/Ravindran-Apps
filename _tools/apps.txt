@@ -4,12 +4,12 @@
 # (its links point to https://apps.ravindran.in/<slug>/), then run
 #   python3 _tools/make_pages.py
 # Private repos need GITHUB_TOKEN on the Cloudflare project (see README.md).
-postrix               Maniq-Posture
-cloudparity           CloudParity
-invoice-consolidator  Azure-IG
-cloudcostiq           Azure-CloudCostIQ
-cloudbounty           CloudBounty
+maniq-posture         Maniq-Posture
+maniq-compare         CloudParity
+maniq-invoice         Azure-IG
+maniq-spend           Azure-CloudCostIQ
+maniq-sweep           CloudBounty
 Maniq-Shield          AzureShield
 Maniq-Watch           AWS-Sentinel
-cybershield           CyberShield-EEE
-threatguard           CyberGuard-Academy
+maniq-academy         CyberShield-EEE
+maniq-arcade          CyberGuard-Academy

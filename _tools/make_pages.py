@@ -6,10 +6,12 @@ Run from the apps.ravindran.in-main folder:   python3 _tools/make_pages.py
 The app descriptions live in one place: the cards on ../ravindran.in-main/ai-automation.html.
 Each app's card is the one whose links point to https://apps.ravindran.in/<slug>/.
 This script writes:
-  index.html          the hub, with the cards grouped as on ai-automation.html
-  <slug>/index.html   one page per app in _tools/apps.txt, with the live app in a frame
-and copies css/style.css, favicon.ico and images/og-card.png from ravindran.in so both
-sites look the same. The apps themselves (<slug>/app/) are built from GitHub by
+  index.html          the hub: apps grouped as on ai-automation.html, as compact cards
+  <slug>/index.html   one page per app in _tools/apps.txt: details and the how-to video
+                      side by side, then the live app full width underneath
+and copies css/style.css, favicon.ico and the icons from ravindran.in so both sites look
+the same. css/apps.css (this site only) holds the hub and app-page layout.
+To add a how-to video, paste its YouTube link into VIDEO below and run this script. The apps themselves (<slug>/app/) are built from GitHub by
 _tools/build-apps.sh during every Cloudflare build.
 Only files whose content changed are written.
 """
@@ -20,35 +22,53 @@ MAIN = os.path.join(os.path.dirname(SITE), 'ravindran.in-main')
 OWNER = 'ravindranmani1980'
 BASE = 'https://apps.ravindran.in'
 CSS_VERSION = '20261027b'
+APPS_CSS_VERSION = '20261031'
 
 # One-line description shown under the app name on its page.
 TAGLINE = {
-    'postrix':              'External security posture scanner',
-    'cloudparity':          'Multi-cloud cost and performance analytics',
-    'invoice-consolidator': 'Multi-subscription Azure invoice analyzer',
-    'cloudcostiq':          'Cost savings analyzer and FinOps benchmarks',
-    'cloudbounty':          'FinOps bounty dashboard and zombie-resource game',
+    'maniq-posture':        'External security posture scanner',
+    'maniq-compare':        'Multi-cloud cost and performance analytics',
+    'maniq-invoice':        'Multi-subscription Azure invoice analyzer',
+    'maniq-spend':          'Cloud cost savings analyzer and FinOps benchmarks',
+    'maniq-sweep':          'Multi-cloud FinOps dashboard and zombie-resource game',
     'Maniq-Shield':         'Azure Storage and RBAC security auditor',
     'Maniq-Watch':          'AWS S3 and IAM security auditor',
-    'cybershield':          'Cyber defense training suite',
-    'threatguard':          'Cyber defense game for teens and young adults',
+    'maniq-academy':        'Cyber defense training suite',
+    'maniq-arcade':         'Cyber defense game for teens and young adults',
 }
 # What the frame intro says. Default: runs in the browser with sample data.
 INTRO = {
-    'postrix': 'Try it below. It checks the public website you enter: its security headers, '
+    'maniq-posture': 'Try it below. It checks the public website you enter: its security headers, '
                'its redirects and its DMARC email record. Only check sites you own or are allowed to test.',
 }
 DEFAULT_INTRO = 'Try it below: it runs in your browser with built-in sample data.'
-# Optional extra link on an app page: slug -> (url, label)
-EXTRA_LINK = {
-    'cybershield': ('https://ais-pre-elolfngen6z6f37daibx6g-647805725217.us-east1.run.app/', 'Full version'),
-}
-# Optional training video on an app page: slug -> (YouTube video id, title)
+# How-to video for each app: paste the YouTube link (https://youtu.be/... or
+# https://www.youtube.com/watch?v=...). Leave it '' to show the "coming soon" placeholder.
 VIDEO = {
-    'postrix': ('6bUHoCgOfi8', 'Postrix walkthrough'),
+    'maniq-posture':        'https://youtu.be/6bUHoCgOfi8',
+    'Maniq-Shield':         '',
+    'Maniq-Watch':          '',
+    'maniq-compare':        '',
+    'maniq-invoice':        '',
+    'maniq-spend':          '',
+    'maniq-sweep':          '',
+    'maniq-academy':        '',
+    'maniq-arcade':         '',
 }
 # Hub sections, in order: (id of the <h4 class="proj-sub"> on ai-automation.html, menu label)
 GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training')]
+# One line under each hub section heading.
+GROUP_INTRO = {
+    'apps-security': 'Check websites and cloud accounts for risky settings, and get the fixes written out.',
+    'apps-finops':   'Compare cloud prices, consolidate invoices and find savings across Azure, AWS and Google Cloud.',
+    'apps-training': 'Practise spotting phishing, scams and attacks in safe, hands-on simulations.',
+}
+
+def video_id(slug):
+    link = (VIDEO.get(slug) or '').strip()
+    m = re.search(r'(?:youtu\.be/|[?&]v=|/embed/|/shorts/)([A-Za-z0-9_-]{11})', link) or \
+        re.fullmatch(r'([A-Za-z0-9_-]{11})', link)
+    return m.group(1) if m else ''
 
 ARROW = '<span aria-hidden="true">&#8599;</span>'
 changed = []
@@ -126,6 +146,7 @@ const btn=document.getElementById('navBtn'),links=document.getElementById('navli
 btn.addEventListener('click',()=>{const open=links.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))});
 links.addEventListener('click',e=>{if(e.target.closest('a')){links.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.focus()}});
+document.querySelectorAll('.video-facade').forEach(b=>b.addEventListener('click',()=>{const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.vid+'?autoplay=1&rel=0';f.title=b.getAttribute('aria-label');f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.referrerPolicy='strict-origin-when-cross-origin';f.allowFullscreen=true;b.replaceWith(f);}));
 </script>
 </body></html>
 '''
@@ -157,91 +178,97 @@ def head(title, desc, url):
 <meta name="twitter:image" content="{BASE}/images/og-card.png">
 {fonts}
 <link rel="stylesheet" href="/css/style.css?v={CSS_VERSION}">
+<link rel="stylesheet" href="/css/apps.css?v={APPS_CSS_VERSION}">
 <noscript><style>@media(max-width:1000px){{nav.wrap{{height:auto;padding-top:12px;padding-bottom:12px}}.navtoggle{{display:none}}.navlinks{{position:static;max-height:none;visibility:visible;width:100%}}}}</style></noscript>
 </head><body><a class="skip-link" href="#main">Skip to content</a>
 '''
 
-def local_links(card):
-    """Hub cards link to the app pages on this site."""
-    return card.replace(BASE + '/', '/')
+def card_parts(card):
+    """kicker, title, the 'Gives you' sentence."""
+    kicker, title, facts = card_facts(card)
+    g = re.search(r'<dt>Gives you</dt>\s*<dd>(.*?)</dd>', facts, re.S)
+    return kicker, title, (g.group(1).strip() if g else '')
 
 def hub(groups, apps):
-    names = {g: label for g, label in GROUPS}
-    sub = re.findall(r'<h4 class="proj-sub" id="([^"]+)">(.*?)</h4>', src)
-    titles = dict(sub)
-    listed = {s for s, _ in apps}
-    body = []
-    for gid, _ in GROUPS:
-        cards = [local_links(c) for s, c in groups.get(gid, []) if s in listed]
-        if not cards:
+    sub = dict(re.findall(r'<h4 class="proj-sub" id="([^"]+)">(.*?)</h4>', src))
+    listed = [s for s, _ in apps]
+    chips, body = [], []
+    for gid, label in GROUPS:
+        items = [(s, c) for s, c in groups.get(gid, []) if s in listed]
+        if not items:
             continue
-        body.append(f'      <h2 class="proj-sub" id="{gid}">{titles.get(gid, names[gid])}</h2>\n'
-                    f'      <div class="cards projects apps">\n        ' + '\n        '.join(cards) + '\n      </div>')
-    n = len(listed)
-    desc = ('Cloud security, FinOps and security-awareness apps by Ravindran Mani: '
-            'Postrix, Maniq Shield, Maniq Watch, CloudParity, CloudBounty and more. Free to try in the browser.')
-    return head('Cloud Security & FinOps Apps | Ravindran Mani', desc, BASE + '/') + header('/') + f'''
-<main id="main">
-  <section class="alt">
+        name = sub.get(gid, label)
+        chips.append(f'<a href="#{gid}">{name} <span class="count">{len(items)}</span></a>')
+        cards = []
+        for slug, card in items:
+            kicker, title, gives = card_parts(card)
+            ht = html.escape(title)
+            vid = '<span class="has-video" title="Has a how-to video">&#9654; Video</span>' if video_id(slug) else ''
+            cards.append(f'''<article class="app-card">
+          <span class="idx">{kicker}</span>
+          <h3><a href="/{slug}/">{ht}</a></h3>
+          <p class="tagline">{html.escape(TAGLINE.get(slug, title))}</p>
+          <p class="sum">{gives}</p>
+          <div class="row"><a class="btn btn-primary btn-sm" href="/{slug}/" aria-label="Try {ht}">Try it</a><a class="btn btn-secondary btn-sm" href="/{slug}/app/" target="_blank" rel="noopener" aria-label="Open {ht} full screen">Full screen {ARROW}</a>{vid}</div>
+        </article>''')
+        body.append(f'''  <section class="hub-group" id="{gid}" aria-labelledby="{gid}-h">
     <div class="wrap">
-      <div class="section-head">
-        <div class="kicker mono">{n} apps &middot; free to try</div>
-        <h1>Cloud security and FinOps apps</h1>
-        <p>Tools for checking cloud security, controlling cloud spend and training people to spot attacks. Each one opens in your browser, with no sign-up.</p>
+      <div class="hub-group-head"><h2 id="{gid}-h">{name}</h2><p>{GROUP_INTRO.get(gid, '')}</p></div>
+      <div class="hub-grid">
+        {(chr(10) + '        ').join(cards)}
       </div>
     </div>
-  </section>
-  <section aria-label="Apps">
+  </section>''')
+    n = len(listed)
+    desc = ('Cloud security, FinOps and security-awareness apps by Ravindran Mani: '
+            'Maniq Posture, Maniq Shield, Maniq Watch, Maniq Compare, Maniq Spend and more. Free to try in the browser.')
+    return head('Cloud Security & FinOps Apps | Ravindran Mani', desc, BASE + '/') + header('/') + f'''
+<main id="main">
+  <section class="alt hub-hero">
     <div class="wrap">
-{chr(10).join(body)}
+      <div class="kicker">{n} apps &middot; free &middot; no sign-up</div>
+      <h1>Cloud security and FinOps apps</h1>
+      <p>Tools for checking cloud security, controlling cloud spend and training people to spot attacks. Each one runs in your browser, right here on this site.</p>
+      <nav class="hub-nav" aria-label="App categories">{''.join(chips)}</nav>
     </div>
   </section>
+{chr(10).join(body)}
 </main>
 {FOOTER}'''
 
-def video_section(slug, ht):
-    if slug not in VIDEO:
-        return ''
-    vid, vt = VIDEO[slug]
-    vt = html.escape(vt)
-    return f'''<section class="app-video" aria-labelledby="video-h" style="padding:40px 16px 8px">
-  <div class="wrap" style="max-width:960px">
-    <h2 id="video-h" style="margin:0 0 6px">Watch the walkthrough</h2>
-    <p style="margin:0 0 16px;color:var(--ink-soft)">A short guided tour of {ht}, then try it yourself below.</p>
-    <div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#0B1220;box-shadow:0 12px 40px rgba(8,20,32,0.18)">
-      <iframe src="https://www.youtube-nocookie.com/embed/{vid}?rel=0" title="{vt}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <p style="margin:10px 0 0;font-size:0.88rem;color:var(--ink-soft)"><a href="https://youtu.be/{vid}" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a></p>
-  </div>
-</section>
-'''
+def video_block(slug, ht):
+    vid = video_id(slug)
+    if vid:
+        return f'''<div class="video-box"><button type="button" class="video-facade" data-vid="{vid}" aria-label="Play video: How to use {ht}"><img src="https://i.ytimg.com/vi/{vid}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="play" aria-hidden="true"></span></button></div>
+        <p class="video-meta"><span>Short guided tour, then try it yourself below.</span><a class="text-link" href="https://youtu.be/{vid}" target="_blank" rel="noopener">Watch on YouTube {ARROW}</a></p>'''
+    return '''<div class="video-box video-empty" role="img" aria-label="How-to video coming soon"><div><span class="play-outline" aria-hidden="true"></span><strong>How-to video</strong><span class="soon">Coming soon</span></div></div>'''
 
-def page(slug, repo, kicker, title, facts, tagline, public_repo):
-    links = [f'<a class="card-link" href="app/" target="_blank" rel="noopener">Open full screen {ARROW}</a>']
-    if slug in EXTRA_LINK:
-        u, label = EXTRA_LINK[slug]
-        links.append(f'<a class="card-link" href="{u}" target="_blank" rel="noopener">{label} {ARROW}</a>')
-    if public_repo:
-        links.append(f'<a class="card-link" href="https://github.com/{OWNER}/{repo}" target="_blank" rel="noopener">Source on GitHub {ARROW}</a>')
-    links.append('<a class="card-link" href="/"><span aria-hidden="true">&larr;</span> All apps</a>')
+def page(slug, kicker, title, facts, tagline):
     url = f'{BASE}/{slug}/'
     desc = f'{title}: {tagline}. Free to try in your browser, built by Ravindran Mani.'
     ht = html.escape(title)
     return head(f'{title}: {tagline} | Ravindran Mani', desc, url) + header('') + f'''
 <main id="main">
-<section class="alt app-intro">
+<section class="alt app-top">
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Apps</a> <span aria-hidden="true">/</span> {ht}</nav>
-    <div class="section-head">
-      <div class="kicker mono">{kicker}</div>
-      <h1>{ht}</h1>
-      <p>{html.escape(tagline)}. {html.escape(INTRO.get(slug, DEFAULT_INTRO))}</p>
+    <div class="app-top-grid">
+      <div class="app-info">
+        <div class="kicker">{kicker}</div>
+        <h1>{ht}</h1>
+        <p class="lead">{html.escape(tagline)}. {html.escape(INTRO.get(slug, DEFAULT_INTRO))}</p>
+        {facts}
+        <div class="app-actions"><a class="btn btn-primary" href="#app">Try it now <span aria-hidden="true">&darr;</span></a><a class="btn btn-secondary" href="app/" target="_blank" rel="noopener">Open full screen {ARROW}</a><a class="text-link" href="/"><span aria-hidden="true">&larr;</span> All apps</a></div>
+      </div>
+      <div class="app-video">
+        <div class="kicker">How to use {ht}</div>
+        {video_block(slug, ht)}
+      </div>
     </div>
-    {facts}
-    <div class="card-links">{''.join(links)}</div>
   </div>
 </section>
-{video_section(slug, ht)}<section class="app-stage" aria-label="{ht} live app">
+<section class="app-stage" id="app" aria-labelledby="app-h">
+  <div class="app-stage-head"><h2 id="app-h">Try {ht}</h2><a class="text-link" href="app/" target="_blank" rel="noopener">Open full screen {ARROW}</a></div>
   <div class="app-frame"><iframe src="app/" title="{ht} live app" loading="lazy" allow="clipboard-write; fullscreen" allowfullscreen></iframe></div>
   <p class="app-hint">On a phone? <a href="app/" target="_blank" rel="noopener">Open it full screen</a> for the best view.</p>
 </section>
@@ -257,8 +284,7 @@ for slug, repo in apps:
         print(f'skip {slug}: no card on ai-automation.html links to {BASE}/{slug}/')
         continue
     kicker, title, facts = card_facts(card)
-    public_repo = f'github.com/{OWNER}/{repo}"' in card
-    write(f'{slug}/index.html', page(slug, repo, kicker, title, facts, TAGLINE.get(slug, title), public_repo))
+    write(f'{slug}/index.html', page(slug, kicker, title, facts, TAGLINE.get(slug, title)))
 write('index.html', hub(groups, apps))
 for rel in ('css/style.css', 'favicon.ico', 'apple-touch-icon.png', 'images/og-card.png', 'images/rm-mark.png'):
     copy(rel)

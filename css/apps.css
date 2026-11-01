@@ -1,0 +1,84 @@
+/* apps.css - layout for apps.ravindran.in only (hub and app pages).
+   Loaded after css/style.css, which is copied from ravindran.in. Added 31 Oct 2026. */
+
+/* ---------- Buttons ---------- */
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:6px;
+  font-size:0.92rem; font-weight:600; line-height:1.2; text-decoration:none; border:1px solid transparent;
+  transition:background .15s ease, border-color .15s ease, color .15s ease; }
+.btn-primary{ background:var(--navy); color:var(--paper); }
+.btn-primary:hover, .btn-primary:focus-visible{ background:var(--navy-deep); }
+.btn-secondary{ background:transparent; color:var(--navy); border-color:#C3C9BE; }
+.btn-secondary:hover, .btn-secondary:focus-visible{ border-color:var(--accent); }
+.btn-sm{ padding:7px 13px; font-size:0.85rem; }
+.btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.text-link{ font-size:0.9rem; color:var(--ink-soft); text-decoration:none; border-bottom:1px solid transparent; }
+.text-link:hover, .text-link:focus-visible{ color:var(--navy); border-color:var(--accent); }
+
+/* ---------- Hub ---------- */
+section.hub-hero{ padding:56px 0 44px; }
+.hub-hero .kicker{ font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--teal); margin-bottom:8px; }
+.hub-hero h1{ font-size:2.3rem; line-height:1.2; }
+.hub-hero p{ color:var(--ink-soft); max-width:62ch; margin:14px 0 0; }
+.hub-nav{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+.hub-nav a{ display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border:1px solid #C3C9BE; border-radius:999px;
+  background:var(--paper); color:var(--navy); font-size:0.9rem; font-weight:500; text-decoration:none; }
+.hub-nav a:hover, .hub-nav a:focus-visible{ border-color:var(--accent); }
+.hub-nav .count{ font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--teal); }
+
+section.hub-group{ padding:44px 0 8px; scroll-margin-top:72px; }
+section.hub-group:last-of-type{ padding-bottom:76px; }
+.hub-group-head{ border-bottom:1px solid #D9DDD3; padding-bottom:12px; margin-bottom:22px; }
+.hub-group-head h2{ font-size:1.5rem; }
+.hub-group-head p{ color:var(--ink-soft); font-size:0.95rem; margin:4px 0 0; }
+.hub-grid{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px; }
+@media (max-width:900px){ .hub-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+@media (max-width:600px){ .hub-grid{ grid-template-columns:1fr; } section.hub-hero{ padding:40px 0 32px; } .hub-hero h1{ font-size:1.9rem; } }
+
+.app-card{ display:flex; flex-direction:column; background:#FBFCFA; border:1px solid #D9DDD3; border-radius:10px;
+  padding:22px 22px 18px; transition:border-color .15s ease, box-shadow .15s ease; }
+.app-card:hover, .app-card:focus-within{ border-color:var(--teal); box-shadow:0 10px 30px rgba(8,20,32,0.08); }
+.app-card .idx{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--teal); }
+.app-card h3{ font-size:1.2rem; margin:6px 0 4px; }
+.app-card h3 a{ color:inherit; text-decoration:none; }
+.app-card .tagline{ font-size:0.9rem; font-weight:500; color:var(--navy); margin:0 0 8px; }
+.app-card .sum{ font-size:0.9rem; color:var(--ink-soft); margin:0 0 18px; flex:1; }
+.app-card .row{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.app-card .has-video{ margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--teal); }
+
+/* ---------- App page: top row (details | video) ---------- */
+section.app-top{ padding:36px 0 48px; }
+.app-top .crumbs{ margin-bottom:22px; }
+.app-top-grid{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:48px; align-items:start; }
+@media (max-width:900px){ .app-top-grid{ grid-template-columns:1fr; gap:32px; } }
+.app-info .kicker, .app-video .kicker{ font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--teal); margin-bottom:8px; }
+.app-info h1{ font-size:2.1rem; line-height:1.2; margin:0 0 10px; }
+.app-info .lead{ color:var(--ink-soft); margin:0 0 22px; }
+.app-info .proj-facts{ flex:none; margin-bottom:26px; }
+.app-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; }
+
+.video-box{ position:relative; aspect-ratio:16 / 9; border-radius:10px; overflow:hidden; background:var(--navy-deep);
+  box-shadow:0 12px 40px rgba(8,20,32,0.18); }
+.video-box iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-facade{ position:absolute; inset:0; width:100%; height:100%; padding:0; margin:0; border:0; cursor:pointer; background:#000; }
+.video-facade img{ width:100%; height:100%; object-fit:cover; display:block; opacity:0.9; transition:opacity .15s ease; }
+.video-facade:hover img, .video-facade:focus-visible img{ opacity:1; }
+.video-facade .play{ position:absolute; left:50%; top:50%; width:72px; height:50px; margin:-25px 0 0 -36px; border-radius:12px;
+  background:rgba(8,20,32,0.82); transition:background .15s ease; }
+.video-facade .play::after{ content:""; position:absolute; left:29px; top:15px; border-style:solid; border-width:10px 0 10px 17px;
+  border-color:transparent transparent transparent #fff; }
+.video-facade:hover .play, .video-facade:focus-visible .play{ background:var(--accent); }
+.video-facade:focus-visible{ outline:3px solid var(--accent); outline-offset:-3px; }
+.video-meta{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; margin:10px 0 0; font-size:0.88rem; color:var(--ink-soft); }
+
+.video-empty{ display:flex; align-items:center; justify-content:center; text-align:center; background:var(--paper);
+  border:2px dashed #C3C9BE; box-shadow:none; color:var(--ink-soft); }
+.video-empty .play-outline{ display:block; width:56px; height:56px; margin:0 auto 12px; border:2px solid #A9B1A4; border-radius:50%; position:relative; }
+.video-empty .play-outline::after{ content:""; position:absolute; left:21px; top:16px; border-style:solid; border-width:11px 0 11px 17px;
+  border-color:transparent transparent transparent #A9B1A4; }
+.video-empty strong{ display:block; color:var(--navy); font-size:0.98rem; }
+.video-empty span.soon{ font-size:0.88rem; }
+
+/* ---------- App page: bottom row (live app, full width) ---------- */
+section.app-stage{ padding:36px 16px 64px; scroll-margin-top:64px; }
+.app-stage-head{ max-width:1440px; margin:0 auto 14px; display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 16px; }
+.app-stage-head h2{ font-size:1.35rem; }

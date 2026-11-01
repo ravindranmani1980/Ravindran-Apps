@@ -1,4 +1,4 @@
-// Shared helpers for the Postrix API (Cloudflare Pages Functions).
+// Shared helpers for the Maniq Posture API (Cloudflare Pages Functions).
 // Files starting with "_" are not routes.
 
 export const json = (obj, status = 200) =>
