@@ -49,7 +49,7 @@ VIDEO = {
     'maniq-posture':        'https://youtu.be/6bUHoCgOfi8',
     'Maniq-Shield':         'https://youtu.be/KnoAlHQ2FhI',
     'Maniq-Watch':          'https://youtu.be/zGVGi_Ao6Rg',
-    'Maniq-Govern':         '',
+    'Maniq-Govern':         'https://youtu.be/_78OEWnokhg',
     'maniq-compare':        'https://youtu.be/NQtleY5oZBk',
     'maniq-invoice':        'https://youtu.be/nlu8zbqNqxI',
     'maniq-spend':          'https://youtu.be/waFrjN4kC0o',
