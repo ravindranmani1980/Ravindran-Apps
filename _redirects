@@ -42,3 +42,8 @@
 /threatguard           /maniq-arcade/        301
 /threatguard/          /maniq-arcade/        301
 /threatguard/*         /maniq-arcade/:splat  301
+
+# Maniq Govern added 6 Nov 2026 (lowercase spelling)
+/maniq-govern      /Maniq-Govern/        301
+/maniq-govern/     /Maniq-Govern/        301
+/maniq-govern/*    /Maniq-Govern/:splat  301

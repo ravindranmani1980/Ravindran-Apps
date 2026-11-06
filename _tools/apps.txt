@@ -11,5 +11,6 @@ maniq-spend           Azure-CloudCostIQ
 maniq-sweep           CloudBounty
 Maniq-Shield          AzureShield
 Maniq-Watch           AWS-Sentinel
+Maniq-Govern          maniq-govern
 maniq-academy         CyberShield-EEE
 maniq-arcade          CyberGuard-Academy

@@ -33,6 +33,7 @@ TAGLINE = {
     'maniq-sweep':          'Multi-cloud FinOps dashboard and zombie-resource game',
     'Maniq-Shield':         'Azure Storage and RBAC security auditor',
     'Maniq-Watch':          'AWS S3 and IAM security auditor',
+    'Maniq-Govern':         'Architecture, governance and adoption analytics for Microsoft Copilot',
     'maniq-academy':        'Cyber defense training suite',
     'maniq-arcade':         'Cyber defense game for teens and young adults',
 }
@@ -48,6 +49,7 @@ VIDEO = {
     'maniq-posture':        'https://youtu.be/6bUHoCgOfi8',
     'Maniq-Shield':         'https://youtu.be/KnoAlHQ2FhI',
     'Maniq-Watch':          'https://youtu.be/zGVGi_Ao6Rg',
+    'Maniq-Govern':         '',
     'maniq-compare':        'https://youtu.be/NQtleY5oZBk',
     'maniq-invoice':        'https://youtu.be/nlu8zbqNqxI',
     'maniq-spend':          'https://youtu.be/waFrjN4kC0o',
