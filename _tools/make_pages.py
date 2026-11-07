@@ -34,6 +34,7 @@ TAGLINE = {
     'Maniq-Shield':         'Azure Storage and RBAC security auditor',
     'Maniq-Watch':          'AWS S3 and IAM security auditor',
     'Maniq-Govern':         'Architecture, governance and adoption analytics for Microsoft Copilot',
+    'Maniq-Chronos':        'Team project and task workspace that works offline',
     'maniq-academy':        'Cyber defense training suite',
     'maniq-arcade':         'Cyber defense game for teens and young adults',
 }
@@ -50,6 +51,7 @@ VIDEO = {
     'Maniq-Shield':         'https://youtu.be/KnoAlHQ2FhI',
     'Maniq-Watch':          'https://youtu.be/zGVGi_Ao6Rg',
     'Maniq-Govern':         'https://youtu.be/_78OEWnokhg',
+    'Maniq-Chronos':        '',
     'maniq-compare':        'https://youtu.be/NQtleY5oZBk',
     'maniq-invoice':        'https://youtu.be/nlu8zbqNqxI',
     'maniq-spend':          'https://youtu.be/waFrjN4kC0o',
@@ -58,12 +60,13 @@ VIDEO = {
     'maniq-arcade':         'https://youtu.be/sKUw_Sd7eJI',
 }
 # Hub sections, in order: (id of the <h4 class="proj-sub"> on ai-automation.html, menu label)
-GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training')]
+GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training'), ('apps-productivity', 'Productivity')]
 # One line under each hub section heading.
 GROUP_INTRO = {
     'apps-security': 'Check websites and cloud accounts for risky settings, and get the fixes written out.',
     'apps-finops':   'Compare cloud prices, consolidate invoices and find savings across Azure, AWS and Google Cloud.',
     'apps-training': 'Practise spotting phishing, scams and attacks in safe, hands-on simulations.',
+    'apps-productivity': 'Plan projects, schedule work and keep a team on track, online or offline.',
 }
 
 def video_id(slug):

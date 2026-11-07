@@ -12,5 +12,6 @@ maniq-sweep           CloudBounty
 Maniq-Shield          AzureShield
 Maniq-Watch           AWS-Sentinel
 Maniq-Govern          maniq-govern
+Maniq-Chronos         Maniq-Chronos
 maniq-academy         CyberShield-EEE
 maniq-arcade          CyberGuard-Academy

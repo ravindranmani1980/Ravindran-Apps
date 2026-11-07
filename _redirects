@@ -47,3 +47,8 @@
 /maniq-govern      /Maniq-Govern/        301
 /maniq-govern/     /Maniq-Govern/        301
 /maniq-govern/*    /Maniq-Govern/:splat  301
+
+# Maniq Chronos added 6 Nov 2026 (lowercase spelling)
+/maniq-chronos      /Maniq-Chronos/        301
+/maniq-chronos/     /Maniq-Chronos/        301
+/maniq-chronos/*    /Maniq-Chronos/:splat  301
