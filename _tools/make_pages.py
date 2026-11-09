@@ -38,6 +38,7 @@ TAGLINE = {
     'maniq-academy':        'Cyber defense training suite',
     'maniq-arcade':         'Cyber defense game for teens and young adults',
     'Maniq-Pipeline':       'Hands-on CI/CD academy and deployment sandbox',
+    'Maniq-PipeCraft':      'Visual Jenkins pipeline builder and DevOps studio',
 }
 # What the frame intro says. Default: runs in the browser with sample data.
 INTRO = {
@@ -60,14 +61,16 @@ VIDEO = {
     'maniq-academy':        'https://youtu.be/n8pxh4odVqQ',
     'maniq-arcade':         'https://youtu.be/sKUw_Sd7eJI',
     'Maniq-Pipeline':       '',
+    'Maniq-PipeCraft':      '',
 }
 # Hub sections, in order: (id of the <h4 class="proj-sub"> on projects.html, menu label)
-GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training'), ('apps-productivity', 'Productivity')]
+GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training'), ('apps-devops', 'DevOps'), ('apps-productivity', 'Productivity')]
 # One line under each hub section heading.
 GROUP_INTRO = {
     'apps-security': 'Check websites and cloud accounts for risky settings, and get the fixes written out.',
     'apps-finops':   'Compare cloud prices, consolidate invoices and find savings across Azure, AWS and Google Cloud.',
-    'apps-training': 'Practise spotting phishing, scams and attacks, and building secure CI/CD pipelines, in safe hands-on simulations.',
+    'apps-training': 'Practise spotting phishing, scams and attacks in safe, hands-on simulations.',
+    'apps-devops':   'Build, review and practise CI/CD pipelines for GitHub Actions, GitLab CI and Jenkins without touching production.',
     'apps-productivity': 'Plan projects, schedule work and keep a team on track, online or offline.',
 }
 
