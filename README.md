@@ -8,7 +8,7 @@ Hub and live pages for the apps built by Ravindran Mani. Hosted on Cloudflare Pa
 - `<slug>/index.html` – one page per app (generated); `<slug>/app/` – the app, built from GitHub
 - `functions/api/` – Postrix's backend: `inspect` (headers, redirects, DMARC), `notify-assessment`, `notifications`
 - `_tools/apps.txt` – the apps: `slug repo`
-- `_tools/make_pages.py` – writes the hub and app pages from the cards on `../ravindran.in-main/ai-automation.html`
+- `_tools/make_pages.py` – writes the hub and app pages from the cards on `../ravindran.in-main/projects.html`
 - `_tools/build-apps.sh` – run by `cloudflare-build.sh` on every Cloudflare build; a failed app keeps its last copy; writes `status.json`
 - `_tools/github-workflows/check-apps.yml` – copied to `.github/workflows/` by publish-all.command; rebuilds when an app repo changes
 
@@ -22,5 +22,5 @@ Hub and live pages for the apps built by Ravindran Mani. Hosted on Cloudflare Pa
 
 ## Adding an app
 1. Add `slug repo` to `_tools/apps.txt`.
-2. Add its card on ravindran.in's ai-automation.html with links to `https://apps.ravindran.in/<slug>/`.
+2. Add its card on ravindran.in's projects.html with links to `https://apps.ravindran.in/<slug>/`.
 3. Double-click publish-all.command.

@@ -3,10 +3,10 @@
 
 Run from the apps.ravindran.in-main folder:   python3 _tools/make_pages.py
 
-The app descriptions live in one place: the cards on ../ravindran.in-main/ai-automation.html.
+The app descriptions live in one place: the cards on ../ravindran.in-main/projects.html.
 Each app's card is the one whose links point to https://apps.ravindran.in/<slug>/.
 This script writes:
-  index.html          the hub: apps grouped as on ai-automation.html, as compact cards
+  index.html          the hub: apps grouped as on projects.html, as compact cards
   <slug>/index.html   one page per app in _tools/apps.txt: details and the how-to video
                       side by side, then the live app full width underneath
 and copies css/style.css, favicon.ico and the icons from ravindran.in so both sites look
@@ -61,7 +61,7 @@ VIDEO = {
     'maniq-arcade':         'https://youtu.be/sKUw_Sd7eJI',
     'Maniq-Pipeline':       '',
 }
-# Hub sections, in order: (id of the <h4 class="proj-sub"> on ai-automation.html, menu label)
+# Hub sections, in order: (id of the <h4 class="proj-sub"> on projects.html, menu label)
 GROUPS = [('apps-security', 'Security'), ('apps-finops', 'FinOps'), ('apps-training', 'Training'), ('apps-productivity', 'Productivity')]
 # One line under each hub section heading.
 GROUP_INTRO = {
@@ -110,7 +110,7 @@ def read_apps():
             apps.append((slug, repo))
     return apps
 
-src = open(os.path.join(MAIN, 'ai-automation.html'), encoding='utf-8').read()
+src = open(os.path.join(MAIN, 'projects.html'), encoding='utf-8').read()
 fonts = re.search(r'(<link rel="preconnect".*?</noscript>)', src, re.S).group(1)
 
 def cards_by_group():
@@ -288,7 +288,7 @@ found = {s: c for g in groups.values() for s, c in g}
 for slug, repo in apps:
     card = found.get(slug)
     if not card:
-        print(f'skip {slug}: no card on ai-automation.html links to {BASE}/{slug}/')
+        print(f'skip {slug}: no card on projects.html links to {BASE}/{slug}/')
         continue
     kicker, title, facts = card_facts(card)
     write(f'{slug}/index.html', page(slug, kicker, title, facts, TAGLINE.get(slug, title)))
