@@ -15,3 +15,4 @@ Maniq-Govern          maniq-govern
 Maniq-Chronos         Maniq-Chronos
 maniq-academy         CyberShield-EEE
 maniq-arcade          CyberGuard-Academy
+Maniq-Pipeline        Maniq-Pipeline

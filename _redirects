@@ -52,3 +52,8 @@
 /maniq-chronos      /Maniq-Chronos/        301
 /maniq-chronos/     /Maniq-Chronos/        301
 /maniq-chronos/*    /Maniq-Chronos/:splat  301
+
+# Maniq Pipeline added 9 Nov 2026 (lowercase spelling)
+/maniq-pipeline      /Maniq-Pipeline/        301
+/maniq-pipeline/     /Maniq-Pipeline/        301
+/maniq-pipeline/*    /Maniq-Pipeline/:splat  301
