@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /api/
 Allow: /
 
 Sitemap: https://apps.ravindran.in/sitemap.xml
