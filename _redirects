@@ -62,3 +62,8 @@
 /maniq-pipecraft      /Maniq-PipeCraft/        301
 /maniq-pipecraft/     /Maniq-PipeCraft/        301
 /maniq-pipecraft/*    /Maniq-PipeCraft/:splat  301
+
+# Maniq Trace added 9 Nov 2026 (lowercase spelling)
+/maniq-trace      /Maniq-Trace/        301
+/maniq-trace/     /Maniq-Trace/        301
+/maniq-trace/*    /Maniq-Trace/:splat  301
