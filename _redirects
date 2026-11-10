@@ -67,3 +67,8 @@
 /maniq-trace      /Maniq-Trace/        301
 /maniq-trace/     /Maniq-Trace/        301
 /maniq-trace/*    /Maniq-Trace/:splat  301
+
+# Maniq Vigil added 9 Nov 2026 (lowercase spelling)
+/maniq-vigil      /Maniq-Vigil/        301
+/maniq-vigil/     /Maniq-Vigil/        301
+/maniq-vigil/*    /Maniq-Vigil/:splat  301

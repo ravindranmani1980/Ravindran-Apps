@@ -18,3 +18,4 @@ maniq-arcade          CyberGuard-Academy
 Maniq-Pipeline        Maniq-Pipeline
 Maniq-PipeCraft       Maniq-PipeCraft
 Maniq-Trace           Maniq-Trace
+Maniq-Vigil           Maniq-Vigil
